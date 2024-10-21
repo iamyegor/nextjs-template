@@ -1,4 +1,4 @@
-import { sendMarkTodoCompletedRequest } from "@/app/ftodo/services/fetchTodos";
+import markTodoCompleted from "@/app/ftodo/services/markTodoCompleted";
 import Todo from "@/types/Todo";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -8,7 +8,7 @@ export default function useMarkTodoCompleted() {
     const queryClient = useQueryClient();
 
     const markTodoCompletedMutation = useMutation({
-        mutationFn: sendMarkTodoCompletedRequest,
+        mutationFn: markTodoCompleted,
         onMutate: async (todoId: number) => {
             await queryClient.cancelQueries({ queryKey });
 

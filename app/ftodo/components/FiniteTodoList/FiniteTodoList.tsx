@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
 import useMarkTodoCompleted from "@/app/ftodo/components/FiniteTodoList/hooks/useMarkTodoCompleted";
-import { fetchTodos } from "@/app/ftodo/services/fetchTodos";
+import queryTodos from "@/app/ftodo/services/queryTodos";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeft, CheckCircle, Clock, Loader2 } from "lucide-react";
@@ -11,7 +10,7 @@ import Link from "next/link";
 const FiniteTodoList = () => {
     const { data, isLoading, isError } = useQuery({
         queryKey: ["todos"],
-        queryFn: fetchTodos,
+        queryFn: queryTodos,
         gcTime: 1000,
     });
     const markTodoCompleted = useMarkTodoCompleted();
@@ -44,10 +43,7 @@ const FiniteTodoList = () => {
 
             <ul className="w-full max-w-md flex flex-col items-center mb-8 space-y-4">
                 {todos.map((todo, index) => (
-                    <li
-                        key={index}
-                        className="w-full bg-white rounded-lg overflow-hidden"
-                    >
+                    <li key={index} className="w-full bg-white rounded-lg overflow-hidden">
                         <div className="p-4 flex justify-between items-center">
                             <p
                                 className={`text-lg ${

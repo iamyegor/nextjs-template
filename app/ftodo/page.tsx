@@ -1,11 +1,11 @@
 import FiniteTodoList from "@/app/ftodo/components/FiniteTodoList/FiniteTodoList";
-import { fetchTodos } from "@/app/ftodo/services/fetchTodos";
+import queryTodos from "@/app/ftodo/services/queryTodos";
 import { HydrationBoundary, QueryClient, dehydrate } from "@tanstack/react-query";
 
 export default async function FiniteTodoListPage() {
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery({ queryKey: ["todos"], queryFn: fetchTodos });
+    await queryClient.prefetchQuery({ queryKey: ["todos"], queryFn: queryTodos });
 
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>

@@ -1,14 +1,13 @@
 "use client";
 
-import React from "react";
-import useInfiniteTodosFetch from "@/app/itodo/hooks/useFetchTodosInfinitely";
+import usePagedTodos from "@/app/itodo/hooks/useFetchTodosInfinitely";
 import useMarkTodoCompleted from "@/app/itodo/hooks/useMarkTodoCompleted";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, CheckCircle, Clock, Loader2 } from "lucide-react";
 import Link from "next/link";
 
 const InfiniteTodoListPage = () => {
-    const { todos, todosEndRef, hasNextPage, isLoading, isError } = useInfiniteTodosFetch();
+    const { todos, todosEndRef, hasNextPage, isLoading, isError } = usePagedTodos();
     const markTodoCompleted = useMarkTodoCompleted();
 
     if (isLoading)
@@ -37,10 +36,7 @@ const InfiniteTodoListPage = () => {
 
             <ul className="w-full max-w-md flex flex-col items-center mb-8 space-y-4">
                 {todos.map((todo, index) => (
-                    <li
-                        key={index}
-                        className="w-full bg-white rounded-lg overflow-hidden"
-                    >
+                    <li key={index} className="w-full bg-white rounded-lg overflow-hidden">
                         <div className="p-4 flex justify-between items-center">
                             <p
                                 className={`text-lg ${
